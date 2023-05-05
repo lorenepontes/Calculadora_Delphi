@@ -1,0 +1,14 @@
+program Calculadora;
+
+uses
+  Vcl.Forms,
+  UnitCalc in 'UnitCalc.pas' {FrmCalc};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TFrmCalc, FrmCalc);
+  Application.Run;
+end.

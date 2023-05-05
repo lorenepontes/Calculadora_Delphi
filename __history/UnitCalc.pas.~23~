@@ -1,0 +1,207 @@
+unit UnitCalc;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.StdCtrls;
+
+type
+  TFrmCalc = class(TForm)
+    MainMenu1: TMainMenu;
+    Editar1: TMenuItem;
+    Histrico1: TMenuItem;
+    Sair1: TMenuItem;
+    TLtBHistorico: TListBox;
+    TEdtInserir: TEdit;
+    TBtUm: TButton;
+    TBtMaisMenos: TButton;
+    TBtQuatro: TButton;
+    TBtSete: TButton;
+    TBtPorcent: TButton;
+    TBtDois: TButton;
+    TBtZero: TButton;
+    TBtCinco: TButton;
+    TBtOito: TButton;
+    TBtCE: TButton;
+    TBtTres: TButton;
+    TBtVirgula: TButton;
+    TBtSeis: TButton;
+    TBtNove: TButton;
+    TBtC: TButton;
+    TBtIgual: TButton;
+    TBtMais: TButton;
+    TBtMenos: TButton;
+    TBtMultiplicar: TButton;
+    TBtDividir: TButton;
+    TBtApaga: TButton;
+    procedure comandoteclado;
+    procedure calcula;
+    procedure Sair1Click(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure TBtMaisClick(Sender: TObject);
+    procedure TBtMenosClick(Sender: TObject);
+    procedure TBtMultiplicarClick(Sender: TObject);
+    procedure TBtDividirClick(Sender: TObject);
+    procedure TBtNumeroClick(Sender: TObject);
+    procedure TBtIgualClick(Sender: TObject);
+    procedure TBtCClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+    // EditRc ,EditRec2: string;
+     FOperacao: char;
+     FTotal: Double;
+     FUltimoN : Double;
+     procedure Calcular;
+     procedure Limpar;
+
+
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmCalc: TFrmCalc;
+
+
+
+implementation
+
+{$R *.dfm}
+
+
+
+procedure TFrmCalc.Calcular;
+begin
+  case  FOperacao of
+
+  '+' :  FTotal := FTotal + StrToFloat(TEdtInserir.Text);
+  '-' :  FTotal := FTotal - StrToFloat(TEdtInserir.Text);
+  '*' :  FTotal := FTotal * StrToFloat(TEdtInserir.Text);
+  '/' :  FTotal := FTotal / StrToFloat(TEdtInserir.Text);
+
+
+     TEdtInserir.Text  := FloatToStr(FTotal);
+     FUltimoN := 0;
+
+  end;
+end;
+
+procedure TFrmCalc.comandoteclado;
+begin
+  //
+end;
+
+
+
+procedure TFrmCalc.FormCreate(Sender: TObject);
+begin
+  Limpar;
+end;
+
+procedure TFrmCalc.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+//pega valores
+
+
+  case Key of
+
+  97 : begin
+        //EditRc := TEdtInserir.Text;
+       end;
+
+  107: begin
+
+        // FOperacao := '+';
+
+       end;
+
+  98 : begin
+        // EditRec2 := TEdtInserir.Text;
+       end;
+
+
+  end;
+
+
+ {  if EditRc <> '' then
+     TLtBHistorico.Items.Add(EditRc);
+
+   if  FOperacao <> '' then
+    TLtBHistorico.Items.Add(FOperad);
+
+   if EditRec2 <> '' then
+      TLtBHistorico.Items.Add(EditRec2);
+
+       }
+
+end;
+
+procedure TFrmCalc.Limpar;
+begin
+ FUltimoN := 0;
+ TEdtInserir.Text := '0';
+ FOperacao := '+';
+end;
+
+procedure TFrmCalc.Sair1Click(Sender: TObject);
+begin
+ Close;
+end;
+
+procedure TFrmCalc.TBtCClick(Sender: TObject);
+begin
+ Limpar;
+end;
+
+procedure TFrmCalc.TBtDividirClick(Sender: TObject);
+begin
+ FOperacao := '/';
+ Calcular;
+end;
+
+procedure TFrmCalc.TBtIgualClick(Sender: TObject);
+begin
+   Calcular;
+end;
+
+procedure TFrmCalc.TBtMaisClick(Sender: TObject);
+begin
+  Calcular;
+  FOperacao := '+';
+end;
+
+procedure TFrmCalc.TBtMenosClick(Sender: TObject);
+begin
+ Calcular;
+ FOperacao := '-';
+end;
+
+procedure TFrmCalc.TBtMultiplicarClick(Sender: TObject);
+begin
+ Calcular;
+ FOperacao := '*';
+end;
+
+procedure TFrmCalc.TBtNumeroClick(Sender: TObject);
+begin
+
+  if FUltimoN = 0 then
+  TEdtInserir.Text :=  TButton(Sender).Caption
+  else
+   TEdtInserir.Text := TEdtInserir.Text + TButton(Sender).Caption;
+
+
+   FUltimoN := StrToFloat(TEdtInserir.Text);
+
+end;
+
+procedure  TFrmCalc.calcula;
+begin
+ //
+end;
+
+
+end.
